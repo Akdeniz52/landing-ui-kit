@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "./components/ui/Button";
 import "./styles/globals.scss";
+import { Card } from "./components/ui/Card"
 
 type Theme = "dark" | "light";
 
@@ -68,9 +69,23 @@ export default function App() {
         <section id="features" className="section">
           <div className="container">
             <h2>Özellikler</h2>
-            <p className="muted">Burayı birazdan kartlarla dolduracağız.</p>
+
+            <div style={{ display: "grid", gap: 16, marginTop: 24 }}>
+              <Card title="NFC Destekli" hoverable>
+                Kartı telefona yaklaştır, profil açılsın.
+              </Card>
+
+              <Card title="QR Kod" hoverable>
+                QR ile hızlı paylaşım.
+              </Card>
+
+              <Card title="Analitik" hoverable>
+                Profil görüntülenme istatistiklerini takip et.
+              </Card>
+            </div>
           </div>
         </section>
+
 
         <section id="pricing" className="section">
           <div className="container">
