@@ -6,16 +6,9 @@ type ButtonProps = {
   onClick?: () => void;
 };
 
-export function Button({
-  children,
-  variant = "primary",
-  onClick,
-}: ButtonProps) {
+export function Button({ children, variant = "primary", onClick }: ButtonProps) {
   return (
-    <button
-      className={`${styles.btn} ${styles[variant]}`}
-      onClick={onClick}
-    >
+    <button className={`${styles.btn} ${styles[variant]}`} onClick={onClick}>
       {children}
     </button>
   );

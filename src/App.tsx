@@ -2,16 +2,16 @@ import { useEffect, useState } from "react";
 import { Button } from "./components/ui/Button";
 import "./styles/globals.scss";
 
+type Theme = "dark" | "light";
+
 export default function App() {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
-
-  // ilk açılışta kaydedilmiş tema varsa yükle
-  useEffect(() => {
+  // ✅ localStorage okumasını ilk render'da yapıyoruz (lint friendly)
+  const [theme, setTheme] = useState<Theme>(() => {
     const saved = localStorage.getItem("theme");
-    if (saved === "light" || saved === "dark") setTheme(saved);
-  }, []);
+    return saved === "light" || saved === "dark" ? saved : "dark";
+  });
 
-  // theme değişince html'e uygula + kaydet
+  // ✅ theme değişince html'e uygula + kaydet
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     localStorage.setItem("theme", theme);
@@ -19,11 +19,15 @@ export default function App() {
 
   return (
     <>
-      <a className="skip-link" href="#main">İçeriğe atla</a>
+      <a className="skip-link" href="#main">
+        İçeriğe atla
+      </a>
 
       <header className="header">
         <div className="container header__inner">
-          <div className="brand" aria-label="Ürün adı">KairosCard</div>
+          <div className="brand" aria-label="Ürün adı">
+            KairosCard
+          </div>
 
           <nav className="nav" aria-label="Ana menü">
             <a href="#features">Özellikler</a>
@@ -32,10 +36,7 @@ export default function App() {
             <a href="#contact">İletişim</a>
           </nav>
 
-          <Button
-            variant="secondary"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          >
+          <Button variant="secondary" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
             Tema: {theme === "dark" ? "Dark" : "Light"}
           </Button>
         </div>
@@ -52,7 +53,9 @@ export default function App() {
 
               <div className="hero__actions">
                 <Button onClick={() => alert("Demo CTA")}>Hemen Başla</Button>
-                <Button variant="secondary" onClick={() => alert("Demo 2")}>Canlı Gör</Button>
+                <Button variant="secondary" onClick={() => alert("Demo 2")}>
+                  Canlı Gör
+                </Button>
               </div>
             </div>
 
